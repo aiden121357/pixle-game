@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PLAYGROUND — Tiny games, big fun</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="shop.css">
+</head>
+<body class="home-page">
+  <nav class="nav wrap"><a class="brand" href="index.html"><span class="brand-mark">✦</span> PLAYGROUND</a><div class="nav-links"><a href="#games">Games</a><a href="#shop">Shop</a><a href="#about">About</a><a class="nav-pill" href="#games">Play now <span>↗</span></a></div></nav>
+  <main>
+    <section class="hero wrap">
+      <div class="hero-copy"><p class="eyebrow"><span class="pulse"></span> OPEN FOR FUN</p><h1>Take a<br><em>quick break.</em></h1><p class="hero-text">Three tiny games for big energy. No sign-in, no downloads, just pick a game and get playing.</p><a class="button button-dark" href="#games">Find your game <span>↓</span></a></div>
+      <div class="hero-art" aria-label="Abstract arcade illustration"><div class="sun"></div><div class="art-label">BUILT FOR<br><strong>BOREDOM</strong></div><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="art-card card-one">▲<small>LEVEL<br>UP</small></div><div class="art-card card-two">✦<small>GOOD<br>VIBES</small></div><div class="art-ball"></div></div>
+    </section>
+    <section id="games" class="games-section wrap"><div class="section-heading"><div><p class="eyebrow">THE LINEUP</p><h2>Pick your <em>poison.</em></h2></div><span class="game-count">03 GAMES / 00 ADS</span></div>
+      <div class="game-grid">
+        <a class="game-card snake-card" href="snake.html"><div class="card-top"><span class="tag">01 / REFLEX</span><span class="arrow">↗</span></div><div class="game-icon snake-icon">◌</div><div class="card-bottom"><h3>Snake</h3><p>Eat. Grow. Don't bump.</p><span class="play-label">PLAY GAME <b>→</b></span></div></a>
+        <a class="game-card pac-card" href="pacman.html"><div class="card-top"><span class="tag">02 / CLASSIC</span><span class="arrow">↗</span></div><div class="game-icon pac-icon"></div><div class="card-bottom"><h3>Pac-Man</h3><p>Chomp your way to the top.</p><span class="play-label">PLAY GAME <b>→</b></span></div></a>
+        <a class="game-card race-card" href="racing.html"><div class="card-top"><span class="tag">03 / SPEED</span><span class="arrow">↗</span></div><div class="game-icon race-icon">▰</div><div class="card-bottom"><h3>Neon Drift</h3><p>Hit the gas. Dodge everything.</p><span class="play-label">PLAY GAME <b>→</b></span></div></a>
+      </div>
+    </section>
+    <section id="shop" class="shop-section wrap"><div class="section-heading"><div><p class="eyebrow">THE ARCADE SHOP</p><h2>Play more.<br><em>Unlock more.</em></h2></div><div class="points-balance"><span>✦</span> <strong id="points">0</strong> POINTS</div></div><p class="shop-intro">Earn 1 point for every 10 Snake apples, 10 Pac-Man points, or 100 meters driven. Spend your points on new looks.</p><div class="shop-grid"><article class="shop-item"><div class="swatch swatch-sunset"></div><div><h3>Sunset Mode</h3><p>Warm coral game canvas</p></div><button class="shop-buy" data-item="sunset" data-cost="50">50 ✦</button></article><article class="shop-item"><div class="swatch swatch-mint"></div><div><h3>Mint Mode</h3><p>Fresh lime arcade glow</p></div><button class="shop-buy" data-item="mint" data-cost="75">75 ✦</button></article><article class="shop-item"><div class="swatch swatch-rainbow"></div><div><h3>Rainbow Trail</h3><p>Color-shifting Snake body</p></div><button class="shop-buy" data-item="rainbow" data-cost="100">100 ✦</button></article></div></section>
+    <section id="about" class="about wrap"><div class="about-number">∞</div><div><p class="eyebrow">WHY PLAYGROUND?</p><h2>Small games.<br><em>Zero friction.</em></h2></div><p>Made for those five-minute moments when you need a reset. Everything runs right here in your browser, so you can jump in and out whenever you want.</p></section>
+  </main>
+  <footer class="footer wrap"><span>© 2025 PLAYGROUND</span><span>MADE FOR THE IN-BETWEEN</span></footer>
+<script>
+const points=document.getElementById('points'); const balance=()=>Number(localStorage.getItem('playground-points')||0);
+function renderShop(){points.textContent=balance();const active=localStorage.getItem('playground-active-skin');document.querySelectorAll('.shop-buy').forEach(b=>{const owned=localStorage.getItem('playground-item-'+b.dataset.item)==='true';b.disabled=false;if(owned)b.textContent=active===b.dataset.item?'UNEQUIP':'EQUIP';else{b.textContent=b.dataset.cost+' ✦';b.disabled=balance()<Number(b.dataset.cost)}})}
+document.querySelectorAll('.shop-buy').forEach(b=>b.onclick=()=>{const item=b.dataset.item,cost=Number(b.dataset.cost),owned=localStorage.getItem('playground-item-'+item)==='true';if(owned){localStorage.setItem('playground-active-skin',localStorage.getItem('playground-active-skin')===item?'':item);renderShop();return}if(balance()>=cost){localStorage.setItem('playground-points',balance()-cost);localStorage.setItem('playground-item-'+item,'true');localStorage.setItem('playground-active-skin',item);renderShop()}});renderShop();
+</script></body></html>
